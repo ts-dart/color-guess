@@ -1,6 +1,7 @@
 window.onload = () => {
   rgbColor();
   colorsOption();
+  clickInColor()
 }
 
 function rgbColor() {
@@ -9,7 +10,7 @@ function rgbColor() {
     rgb.push(parseInt(Math.random() * 255));
   }
 
-  const rgbText = `(${rgb[0]},${rgb[1]},${rgb[2]})`;
+  const rgbText = `(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
   const h1Rgb = document.querySelector("#rgb-color");
   
   h1Rgb.innerText = rgbText;
@@ -36,4 +37,28 @@ function colorsOption() {
     
     colorsContainer.appendChild(div);
   }
+
+  let correctRgb = document.querySelector("#rgb-color").innerText;
+
+  let num = parseInt(Math.random() * 6);
+  colorsContainer.children[num].style.backgroundColor = "rgb" + correctRgb;  
 } 
+
+function clickInColor() {
+  const colorsContainer = document.querySelector("#colorsContainer");
+  const answer = document.querySelector("#answer");
+  
+  for (let index = 0; index < colorsContainer.children.length; index += 1) {
+    colorsContainer.children[index].addEventListener("click", (clickElement) => {
+      let rgbColor = document.querySelector("#rgb-color").innerText;
+      rgbColor = "rgb"+rgbColor;
+      
+      if (rgbColor == clickElement.target.style.backgroundColor) {
+        answer.innerText = "Acertou!";
+      }
+      else {
+        answer.innerText = "Errou! Tente novamente!";
+      }
+    })
+  }
+}
