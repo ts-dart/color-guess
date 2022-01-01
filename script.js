@@ -2,7 +2,22 @@ window.onload = () => {
   rgbColor();
   colorsOption();
   clickInColor()
-  resetGame();
+  finalizedGame();
+
+  if (localStorage.length > 0) {
+    let lastSessionValue = localStorage.getItem("points");
+    let showScore = document.querySelector("#score");
+    showScore.innerText = "Pontos: "+ lastSessionValue;
+
+    localStorage.setItem("points", lastSessionValue);
+  }
+  else {
+    let showScore = document.querySelector("#score");
+    showScore.innerText = "Pontos: 0";
+
+    localStorage.setItem("points", 0);
+  }
+
 }
 
 function rgbColor() {
@@ -48,7 +63,6 @@ function colorsOption() {
 function clickInColor() {
   const colorsContainer = document.querySelector("#colorsContainer");
   const answer = document.querySelector("#answer");
-  const score = document.querySelector("#score");
   
   for (let index = 0; index < colorsContainer.children.length; index += 1) {
     colorsContainer.children[index].addEventListener("click", (clickElement) => {
@@ -57,6 +71,7 @@ function clickInColor() {
       
       if (rgbColor == clickElement.target.style.backgroundColor) {
         answer.innerText = "Acertou!";
+        inScore();
       }
       else {
         answer.innerText = "Errou! Tente novamente!";
@@ -66,15 +81,20 @@ function clickInColor() {
   }
 }
 
-function resetGame() {
+function finalizedGame() {
   const btn = document.querySelector("#reset-game");
   btn.addEventListener("click", () => {
     document.location.reload(true);
   })
 }
 
-function score() {
-  let incremento = localStorage.getItem("score") + 3;
-  localStorage.setItem("score", incremento);
-  score.innerText = "Pontos: "+ localStorage.getItem("score");
+function inScore() {
+  const showScore = document.querySelector("#score");
+  let currentValue = parseInt(localStorage.getItem("points"));
+
+  currentValue += 3;
+  console.log(currentValue);
+  localStorage.setItem("points", currentValue);
+
+  showScore.innerText = "Pontos: "+ localStorage.getItem("points");
 }
