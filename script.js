@@ -57,7 +57,6 @@ function clickInColor() {
       
       if (rgbColor == clickElement.target.style.backgroundColor) {
         answer.innerText = "Acertou!";
-        score();
       }
       else {
         answer.innerText = "Errou! Tente novamente!";
