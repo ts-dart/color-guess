@@ -3,7 +3,10 @@ window.onload = () => {
   colorsOption();
   clickInColor()
   finalizedGame();
+  sessionsControl();
+}
 
+function sessionsControl() {
   if (localStorage.length > 0) {
     let lastSessionValue = localStorage.getItem("points");
     let showScore = document.querySelector("#score");
@@ -17,7 +20,6 @@ window.onload = () => {
 
     localStorage.setItem("points", 0);
   }
-
 }
 
 function rgbColor() {
